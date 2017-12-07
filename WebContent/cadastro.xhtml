@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view>
+<h:form id="formCadastro">
+	<p:tabView>
+		<p:tab title="Cadastro Usuário" id="cadAluno">
+			<h:panelGrid columns="2" cellpadding="10" style="heigth: 800%;">
+				<h:outputLabel value="Senha:" />
+				<h:inputSecret value="#{menuBean.cliente.senha}" />
+				
+				<h:outputText value="Numero de Matricula: " />
+				<p:inputText style="color: #000000;"
+					value="#{menuBean.cliente.matricula}" />
+
+				<h:outputText value="Nome do Aluno: " />
+				<p:inputText style="color: #000000;" value="#{menuBean.cliente.nome}" />
+
+				<h:outputText value="Ultimo Nome: " />
+				<p:inputText style="color: #000000;"
+					value="#{menuBean.cliente.ultimo_nome}" />
+
+				<h:outputText value="Telefone: " />
+				<p:inputText style="color: #000000;"
+					value="#{menuBean.cliente.telefone}" />
+
+				<h:outputText value="Logradouro: " />
+				<p:inputText style="color: #000000;"
+					value="#{menuBean.cliente.logradouro}" />
+
+				<h:outputText value="Tipo de Logradouro: " />
+				<p:inputText style="color: #000000;"
+					value="#{menuBean.cliente.tipo_logradouro}" />
+
+				<h:outputText value="Complemento: " />
+				<p:inputText style="color: #000000;"
+					value="#{menuBean.cliente.comp_logradouro}" />
+
+				<h:outputText value="Email: " />
+				<p:inputText style="color: #000000;" value="#{menuBean.cliente.email}"
+					label="Email" />
+
+				<p:selectOneButton value="#{menuBean.cliente.tipoUsuario}">
+					<f:selectItem itemLabel="Professor" itemValue="P" />
+					<f:selectItem itemLabel="Aluno" itemValue="A" />
+					<f:selectItem itemLabel="Funcionario" itemValue="F" />
+				</p:selectOneButton>
+			</h:panelGrid>
+			<p:commandButton value="Enviar" action="#{menuBean.casdastrarCliente}" update="@all"/>
+		</p:tab>
+
+		<p:tab title="Cadastro de Livros" id="cadLivro">
+			<h:panelGrid columns="2" cellpadding="10" style="heigth: 800%;">
+				
+				<h:outputText value="Id do Livro: " />
+				<p:inputText style="color: #000000;" value="#{menuBean.livro.id}" />
+				
+				<h:outputText value="Nome do Livro: " />
+				<p:inputText style="color: #000000;" value="#{menuBean.livro.nome}" />
+					
+				<h:outputText value="Descrição: " />
+				<p:inputText style="color: #000000;" value="#{menuBean.livro.descricao}" />
+				
+				<h:outputText value="Autor: " />
+				<p:inputText style="color: #000000;" value="#{menuBean.livro.autor}" />
+				
+				<h:outputText value="Publicação" />
+				<p:inputMask style="color: #000000;" id="dataPublicação"
+							value="#{menuBean.livro.publicacao}" mask="99/99/9999">
+							<f:convertDateTime  pattern="dd/MM/yyyy"
+								timeZone="America/Sao_Paulo" />
+				</p:inputMask>
+				
+				<h:outputText value="Circulação: " />
+				<p:selectBooleanCheckbox value="#{menuBean.livro.circ}" />
+				
+				<h:outputText value="Edição: " />
+				<p:inputText style="color: #000000;" value="#{menuBean.livro.edicao}" />
+				
+				<h:outputText value="Editora: " />
+				<p:inputText style="color: #000000;" value="#{menuBean.livro.editora}" />
+				
+				<h:outputText value="Emprestado: " />
+				<p:selectBooleanCheckbox value="#{menuBean.livro.emprestado}" />
+				
+				<p:selectOneButton value="#{menuBean.livro.tipo}">
+					<f:selectItem itemLabel="Livro" itemValue="L" />
+					<f:selectItem itemLabel="Revista" itemValue="R" />
+				</p:selectOneButton>
+
+			</h:panelGrid>
+				<p:commandButton value="Enviar" action="#{menuBean.cadastrarLivro}" update="@all"/>
+		</p:tab>
+	</p:tabView>
+</h:form>
+</f:view>
+</html>

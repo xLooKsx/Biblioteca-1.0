@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<f:loadBundle basename="br.com.mensagem.bundle.Mensagens" var="msg" />	
+	<f:view>
+	<h:panelGrid columns="3" style="width: 100%; top: 20%; " id="gridBuscaEmprestimo"  layout="grid" >
+			<h:outputLabel value="Inserir id do Livro:"/>
+			<h:inputText style="right: 15%; " value="#{menuBean.livro.id}" />
+			<p:commandButton style="height: 20%; top: 200%; width: 90%; right: 30%;"
+							 value="Selecionar" action="#{menuBean.emprestimoLivro}" update=":formMenu" id="BuscaEmprestimo" >
+							 <p:defaultCommand target="BuscaEmprestimo" /></p:commandButton>
+	</h:panelGrid>
+	
+	<h:panelGrid columns="2" layout="grid" style="width: 100%;  position: relative; "   id="gridEmprestimo" rendered="#{menuBean.painelEmprestimo}" >	
+			
+			<h:outputLabel value="Nome:" />
+			<h:outputText style="right: 80%;" value="#{menuBean.livro.nome}" />
+			
+			<h:outputLabel value="Autor:" />
+			<h:outputText style="right: 15%;" value="#{menuBean.livro.autor}" />
+			
+			<h:outputLabel value="Descrição:" />
+			<h:outputText style="right: 5%; " value="#{menuBean.livro.descricao}" />
+			
+			<h:outputLabel value="Tipo Material:" />
+			<h:outputText value="#{menuBean.livro.tipo}" />			
+							
+			<h:outputText value="publicação" />
+			<h:outputText value="#{menuBean.livro.ano}"> 
+				<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />
+			</h:outputText>			
+			
+			<h:outputLabel value="Emprestado:" />
+			<p:selectBooleanButton disabled="true" value="#{menuBean.livro.emprestado}" offLabel="Não" onLabel="Sim"
+							style="width: 50% !important;" />	
+							
+			<h:outputLabel value="Em Circulação:" />
+			<p:selectBooleanButton disabled="true" value="#{menuBean.livro.circ}" offLabel="Não" onLabel="Sim" 
+							style="width: 50% !important;" />																							
+							
+			<p:commandButton  value="Realizar Emprestimo" disabled="#{menuBean.livro.emprestado}" 
+								onclick="PF('confirmacaoEmprestimo').show()" style="width: 80%;"/>
+				<p:confirmDialog style="width: 5% !important;" message="Insira a matricula do solicitante" header="Confirmação de Emprestimo" widgetVar="confirmacaoEmprestimo" appendTo=":formMenu:tabMenu" >
+					<h:inputText value="#{menuBean.cliente.matricula}" />
+					<p:commandButton  value="Confirmar" update=":formMenu:tabMenu" action="#{menuBean.realizaEmprestimo}" onclick="PF('cd').hide()"/>
+					<p:commandButton  value="Cancelar" update=":formMenu:tabMenu" onclick="PF('cd').hide()"/>	
+				</p:confirmDialog>
+				
+				
+	</h:panelGrid>	
+				
+	
+<p:growl />
+</f:view>		
+</html>

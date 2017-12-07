@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+      
+      <h:head>
+      	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />  
+      	<link rel="stylesheet" type="text/css" href="css/estilo.css" media="screen" />    	
+      	<title>Biblioteca Impacta</title>
+      </h:head>  
+	  <h:body>	  	
+	  <h:form id="cabecalho">	  	
+		  <ui:include src="cabecalho.xhtml" /> <p:commandButton style="width: 10%; left: 71.5%;" styleClass="ui-button-text-only" action="#{loginBean.logout}" value="#{msg.label_logout}" />
+		  <f:loadBundle basename="br.com.mensagem.bundle.Mensagens" var="msg" />
+	  </h:form>
+	  	<f:view>
+	  	
+	  		<h:form id="formMenu">
+			<p:tabView id="tabMenu" dynamic="true" cache="false">
+			<p:ajax event="tabChange" listener="#{menuBean.onChange}" />
+
+				<p:tab title="Cadastro de Usuario" rendered="#{loginBean.login.bibliotecario}">
+					<h:panelGrid columns="2" cellpadding="10">
+							<ui:include src="/cadastro.xhtml" />
+					</h:panelGrid>
+				</p:tab>
+				<p:tab title="Acervo" id="tabAcervo">
+					<h:panelGrid columns="1" cellpadding="10" style="heigth: 800%;">					
+						<ui:include src="/acervo.xhtml" />										
+					</h:panelGrid>
+				</p:tab>
+				<p:tab title="Realizar emprestimo" id="tabEmprestimo" rendered="#{loginBean.login.bibliotecario}">
+					<h:panelGrid columns="2" cellpadding="10">											
+						<ui:include src="/emprestimo.xhtml" />
+					</h:panelGrid>
+				</p:tab>
+				<p:tab title="Realizar Devolução" rendered="#{loginBean.login.bibliotecario}">
+					<h:panelGrid columns="2" cellpadding="10">
+						<ui:include src="/devolucao.xhtml" />
+					</h:panelGrid>
+				</p:tab>
+				
+			</p:tabView>
+						
+	  		</h:form>
+	  	</f:view>	  	
+	  </h:body>
+</html>
